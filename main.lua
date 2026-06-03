@@ -1,5 +1,5 @@
 local AIClient = loadstring(game:HttpGet("https://raw.githubusercontent.com/riddance-club/riddance-ai/refs/heads/main/dependencies/AIClient.lua"))()
-local processCommand = loadstring("https://raw.githubusercontent.com/riddance-club/riddance-ai/refs/heads/main/dependencies/Commands.lua")()
+local processCommand = loadstring(game:HttpGet("https://raw.githubusercontent.com/riddance-club/riddance-ai/refs/heads/main/dependencies/Commands.lua"))()
 
 local ai_settings = getgenv() and getgenv().riddance_ai
 if not ai_settings then
