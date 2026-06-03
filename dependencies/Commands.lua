@@ -13,13 +13,34 @@ local function resolvePath(path) -- string like "game.Workspace.Terrain"
     return nil
 end
 
+local function getPathWithService(instance) -- ai is so fucking stupid so i have to keep reminding it in some way to not use it directly just because the output gives it like that
+    if typeof(instance) ~= "Instance" then return "" end
+    if instance == game then return "game" end
+    local path = {}
+    local current = instance
+    while current and current ~= game do
+        if current.Parent == game then
+            table.insert(path, 1, 'game:GetService("' .. current.ClassName .. '")')
+        else
+            if string.match(current.Name, "^[%a_][%w_]*$") then
+                table.insert(path, 1, "." .. current.Name)
+            else
+                local safeName = string.gsub(current.Name, '"', '\\"')
+                table.insert(path, 1, '["' .. safeName .. '"]')
+            end
+        end
+        current = current.Parent
+    end
+    return table.concat(path, "")
+end
+
 local commands = {
     ["getchildren"] = function(path)
         local tbl = {}
         local resolvedPath = resolvePath(path)
         if resolvedPath then
             for _, v in resolvedPath:GetChildren() do
-                table.insert(tbl, {v:GetFullName(), v.ClassName})
+                table.insert(tbl, {getPathWithService(v), v.ClassName})
             end
         end
         local encoded = HttpService:JSONEncode(tbl)
@@ -32,7 +53,7 @@ local commands = {
         if resolvedPath then
             for _, v in resolvedPath:GetDescendants() do
                 if v:IsA(target) and (not search or v.Name:find(search)) then
-                    table.insert(tbl, v:GetFullName())
+                    table.insert(tbl, getPathWithService(v))
                 end
             end
         end
@@ -71,7 +92,7 @@ local commands = {
                             elseif valType == "EnumItem" then
                                 processedValue = value.Name
                             elseif valType == "Instance" then
-                                processedValue = value:GetFullName()
+                                processedValue = getPathWithService(value)
                             else 
                                 processedValue = tostring(value)
                             end
