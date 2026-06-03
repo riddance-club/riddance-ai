@@ -14,13 +14,13 @@ function AIClient.new(apiKey, model, url)
     self.Model = model
     self.Url = url
     self.History = {
-        { role = "system", content = systemPrompt }
+        { role = "system", content = SystemPrompt }
     }
     return self
 end
 
-function AIClient:Ask(userPrompt)
-    table.insert(self.History, { role = "user", content = userPrompt })
+function AIClient:Ask(UserPrompt)
+    table.insert(self.History, { role = "user", content = UserPrompt })
 
     local response = request({
         Url = self.Url,
