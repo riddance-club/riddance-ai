@@ -22,7 +22,7 @@ end
 function AIClient:Ask(userPrompt)
     table.insert(self.History, { role = "user", content = userPrompt })
 
-    local response = requestFunc({
+    local response = request({
         Url = self.Url,
         Method = "POST",
         Headers = {
