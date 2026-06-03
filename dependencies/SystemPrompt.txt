@@ -19,5 +19,5 @@ Example usage:
 
 Always use these commands as the only thing in your response if you want to request them.
 Always assume the command output will be in the perspective of a high privilege client.
+Avoid repeating or using more than one command in one prompt at a time.
 Even with high privileges it will not be able to access server only places, such as ServerStorage or ServerScriptService.
-If you add anything else in your response it will not work.
