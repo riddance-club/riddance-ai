@@ -6,7 +6,7 @@ if not ai_settings then
 	error("You have not set up your Riddance AI settings.")
 end
 
-local bot = AIClient.new(ai_settings.ApiKey, ai_settings.Model, settings.Url)
+local bot = AIClient.new(ai_settings.ApiKey, ai_settings.Model, ai_settings.Url)
 local reply = ai_settings.Prompt
 local end_result
 
