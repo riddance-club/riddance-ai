@@ -42,7 +42,7 @@ function AIClient:Ask(UserPrompt)
         table.insert(self.History, aiMessage)
         return aiMessage.content
     else
-        warn("API Error: " .. response.StatusCode .. " - " .. response.Body)
+        error("API Error: " .. response.StatusCode .. " - " .. response.Body)
         return nil
     end
 end
