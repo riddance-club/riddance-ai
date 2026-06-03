@@ -20,4 +20,5 @@ Example usage:
 Always use these commands as the only thing in your response if you want to request them.
 Always assume the command output will be in the perspective of a high privilege client.
 Avoid repeating or using more than one command in one prompt at a time.
+Always assume you have to use game:GetService for services, directly using it's name will not work and will cause an instance not found error.
 Even with high privileges it will not be able to access server only places, such as ServerStorage or ServerScriptService.
